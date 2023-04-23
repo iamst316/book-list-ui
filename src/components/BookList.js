@@ -14,6 +14,7 @@ export default function(){
     let navigate = useNavigate();
     let [newBook, setNewBook] = useState({});
     let [showArr,setShowArr] = useState([false])
+    let [updateArr,setUpdateArr] = useState([false])
     function Logout(){
         navigate("/");
     }
@@ -31,6 +32,10 @@ export default function(){
         // newBook.show = 'false';
         setShowArr([
             ...showArr,
+            false
+        ])
+        setUpdateArr([
+            ...updateArr,
             false
         ])
         // setArr([...arr,
@@ -127,10 +132,49 @@ export default function(){
                                     ])
                                 }}>Delete Book</button>
                                 <button onClick={()=>{
-                                    alert("requires copycat form and arr")
+                                    // alert("requires copycat form and arr")
+                                    setUpdateArr([
+                                        ...updateArr.slice(0,idx),
+                                        !updateArr[idx],
+                                        ...updateArr.slice(idx+1,updateArr.length)
+                                    ])
                                 }}>Edit Book</button>
                         </div>
                         }
+                        {updateArr[idx] && <div>
+                            <h3>Update Book</h3>
+                            <form onSubmit={(e)=>{
+                                e.preventDefault()
+                                setArr([
+                                    ...arr.slice(0,idx),
+                                    {
+                                        title : newTitle,
+                                        isbn : newISBN,
+                                        author:newAuthor,
+                                        description : newDescription,
+                                        date : newDate,
+                                        publisher: newPublisher
+                                    },
+                                    ...arr.slice(idx+1,arr.length)
+                                ])
+                                setUpdateArr([
+                                    ...updateArr.slice(0,idx),
+                                    !updateArr[idx],
+                                    ...updateArr.slice(idx+1,updateArr.length)
+                                ])
+
+                                
+                            }}>
+                                <input type='text' onChange={(e)=> setTitle(e.target.value)} placeholder={i.title} required/>
+                                <input type='text'  onChange={(e)=> setISBN(e.target.value)} placeholder={i.isbn} required/>
+                                <input type='text'  onChange={(e)=> setAuthor(e.target.value)} placeholder={i.author}required/>
+                                <input type='text'  onChange={(e)=> setDescription(e.target.value)} placeholder={i.description} required/>
+                                <input type='date'  onChange={(e)=> setDate(e.target.value)} placeholder={i.date} required/>
+                                <input type='text'  onChange={(e)=> setPublisher(e.target.value)} placeholder={i.publisher} required/>
+                                
+                                <button>Update</button>
+                            </form>
+                        </div>}
                     </div>
                 })}
             </div>

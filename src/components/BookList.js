@@ -52,12 +52,12 @@ export default function(){
 
     let [arr,setArr] = useState([
         {
-            title:"abc",
-            isbn:"0000",
-            author:"aaa",
+            title:"Ecce Homo",
+            isbn:"12455412",
+            author:"Nietszche",
             description:'much wow',
             date: "2023-01-01",
-            publisher:"penguin",
+            publisher:"Penguin Random House",
             show: false
         }
     ])
@@ -66,13 +66,14 @@ export default function(){
         setArr([...arr,
             newBook
         ])
+        
     },[])
 
     return (<>
-        <div id='main'>
-            <h1>Books List</h1>
-            <button onClick={Logout}>Logout</button>
-            <button onClick={AddNewButton}>+ Add New Button</button>
+        <div id='list-main'>
+            <h1 id='list-title'>Books List</h1>
+            <button id='logout-btn' onClick={Logout}>Logout</button>
+            <button id='add-new-btn' onClick={AddNewButton}>+ Add New Button</button>
             <div id='book-list'>
                 {arr.map((i,idx)=>{
                     return <div>
@@ -91,7 +92,7 @@ export default function(){
                             {/* <h3>{arr.indexOf(i)}</h3> */}
                         </button>
                         {showArr[idx] &&
-                            <div>
+                            <div id='book-card'>
                                 <table>
                                     <tbody>
                                         <tr>
@@ -120,7 +121,7 @@ export default function(){
                                         </tr>
                                     </tbody>
                                 </table>
-                                <button onClick={()=>{
+                                <button id='delete-btn' onClick={()=>{
                                     setArr([
                                         ...arr.slice(0,idx),
                                         ...arr.slice(idx+1,arr.length)
@@ -131,7 +132,7 @@ export default function(){
                                         ...showArr.slice(idx+1,showArr.length)
                                     ])
                                 }}>Delete Book</button>
-                                <button onClick={()=>{
+                                <button id='edit-btn' onClick={()=>{
                                     // alert("requires copycat form and arr")
                                     setUpdateArr([
                                         ...updateArr.slice(0,idx),
@@ -141,7 +142,7 @@ export default function(){
                                 }}>Edit Book</button>
                         </div>
                         }
-                        {updateArr[idx] && <div>
+                        {updateArr[idx] && <div id='update-card'>
                             <h3>Update Book</h3>
                             <form onSubmit={(e)=>{
                                 e.preventDefault()
@@ -180,10 +181,10 @@ export default function(){
             </div>
         </div>
         {showAddNew && 
-            <div>
-                <button onClick={AddNewButton}>Show Book List</button>
-                <h1>Add Book</h1>
-                <h3>Create new Book</h3>
+            <div id='add-card'>
+                <button id='show-book-list-btn' onClick={AddNewButton}>Show Book List</button>
+                <h1 id='add-new-title'>Add Book</h1>
+                <h3 id='create-new-title'>Create new Book</h3>
                 <form onSubmit={AddNewBookFormButton}>
                     <input type='text' placeholder="Book Title" onChange={(e)=> setTitle(e.target.value)} required/>
                     <input type='text' placeholder="ISBN" onChange={(e)=> setISBN(e.target.value)} required/>

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+import '../css/Register.css'
 
 export default function(){
     let navigate = useNavigate();
@@ -12,8 +12,8 @@ export default function(){
         navigate("/");
     }
     return (<>
-        <div id='main'>
-            <h1>Register User</h1>
+        <div id='register-main'>
+            <h1 id='register-title'>Register User</h1>
             <form onSubmit={Enter}>
                 <input type='text' placeholder="Username" required/>
 

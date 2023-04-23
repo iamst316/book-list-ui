@@ -1,0 +1,17 @@
+*{
+    /* background-color: red; */
+}
+
+#book-list{
+    display: flex;
+}
+
+#book{
+    border: 2px solid gold;
+    border-radius: 4px;
+    
+}
+#book:hover{
+    /* background-color: black; */
+    box-shadow: 4px 4px red;
+}
